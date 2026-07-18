@@ -122,3 +122,90 @@ console.log(counter.getCount()); // 0
 
 ### Data Privacy 
 In JavaScript, we don't have traditional private variables (though # was introduced recently for classes). Closures allow us to create hidden variables that no outside code can change directly.
+
+# Function
+In JavaScript, a `function` is a specific block of code designed to perform a particular task. Once you write a function, you can reuse it as many times as you like.
+
+### Function Declaration
+This is the traditional way to write a function. The most important feature of a Function Declaration is Hoisting—you can call the function before you actually write it in the code.
+```java
+// Calling the function before it is declared! (Hoisting at work)
+sayHello("Rahul"); 
+
+function sayHello(userName) {
+    console.log("Hello, " + userName + "!");
+}
+```
+### Function Expression
+Here, we create a function without a name (an anonymous function) and store it inside a variable (const or let). Because it is tied to a variable, it is NOT hoisted. You must define it before you use it.
+
+```java
+// calculateArea(5, 10); // ❌ ReferenceError: Cannot access before initialization
+
+const calculateArea = function(length, width) {
+    return length * width;
+};
+
+// Calling it after declaration
+console.log(calculateArea(5, 10)); // ✅ Output: 50
+```
+
+Use `const` for Function Expressions so you don't accidentally overwrite your function later.
+
+### Arrow Function
+Introduced in ES6 (2015), Arrow Functions provide a shorter and cleaner syntax. They drop the function keyword and use an arrow =>. They are heavily used in modern JavaScript (like React).
+
+```java
+// Traditional Function Expression
+const addNumbersOld = function(a, b) {
+    return a + b;
+};
+
+// Modern Arrow Function
+const addNumbersNew = (a, b) => {
+    return a + b;
+};
+
+console.log(addNumbersNew(10, 20)); // Output: 30
+```
+
+## Implicit Return
+If your arrow function has only one line of code that returns a value, you can remove the curly braces {} and the return keyword. It returns the value automatically!
+```java
+// One-liner Arrow Function!
+const multiply = (a, b) => a * b;
+
+console.log(multiply(5, 4)); // Output: 20
+```
+
+### Parameters vs Arguments
+People often confuse these two terms.
+
+Parameters: The placeholders you write when creating the function.
+Arguments: The actual values you pass when calling the function.
+```java
+// Here, 'name' and 'age' are PARAMETERS
+function introduce(name, age) {
+    console.log(`Hi, I am ${name} and I am ${age} years old.`);
+}
+
+// Here, "Ayan" and 25 are ARGUMENTS
+introduce("Ayan", 25);
+```
+
+### The `return` Keyword
+A function can do some work and print something to the console, but if you want to use the result of that function later in your code, you MUST `return` it. If a function doesn't have a `return` statement, it returns `undefined` by default.
+
+```java
+function getDiscountPrice(price) {
+    let discount = price * 0.10; // 10% discount
+    let finalPrice = price - discount;
+    
+    return finalPrice; // We are sending the result back out!
+}
+
+// Now we can save the returned value in a variable
+const myShirtPrice = getDiscountPrice(1000); 
+console.log(myShirtPrice); // Output: 900
+```
+

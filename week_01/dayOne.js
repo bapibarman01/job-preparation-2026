@@ -88,3 +88,49 @@ myAccount.deposit(200);
 myAccount.checkBalance();
 
 console.log(myAccount.balance); //  undefined (Secure!)
+
+
+
+function registerUser({name, email, role = 'User', isActive = true}) {
+    if(!name || !email) {
+        console.log('Name and email must be required');
+        return;
+    }
+    const newUser = {
+        name,
+        email,
+        role: role,
+        starus: isActive? 'Active' : 'Inactive',
+        createdAt: new Date().toLocaleString()
+    }
+    console.log('User successfully registered', newUser);
+}
+
+registerUser({
+    email: 'abc@gmail.com',
+    name: 'Rahul',
+    role: 'Admin',
+    isActive: false
+})
+
+
+
+// Helper Function
+const applyDiscount = (price, discountPercent = 0) => {
+    return price - (price * (discountPercent / 100));
+}
+// Helper Function
+const applyTax = (price, taxPercent) => {
+    return price + (price * (taxPercent / 100));
+}
+
+//  MainFunction
+function calculateFinalBill(cardTotal, discountAmount = 0) {
+    const afterDiscount = applyDiscount(cardTotal, discountAmount);
+    const finalPrice = applyTax(afterDiscount, 18);
+
+    return finalPrice;
+}
+
+const myBill = calculateFinalBill(1000, 10)
+console.log("Final Amount to Pay: ₹" + myBill);
