@@ -4,7 +4,7 @@ In JavaScript, a variable is a named container used to store data values that yo
 There are three main way to declare variable in mordan JavaScript.
 
 ###  `let` :
-Used to declare variables that can be reassigned later. It is block-scoped (only accessible within the curly braces {} where it's defined).
+Used to declare variables that can be reassigned later. It is block-scoped (only accessible within the curly braces `{}` where it's defined).
 ```java
 let score = 10;
 score = 20; // This is allowed
@@ -97,4 +97,28 @@ Local: Is it in the current function/block?
 Enclosing: Is it in a parent function? (Check up the chain)
 Global: Is it in the main script?
 Built-in: Is it a built-in object like `console` or `Math`?
-If it's not found anywhere, it throws a `ReferenceError`
+If it's not found anywhere, it throws a `ReferenceError`.
+
+# Closures
+A Closure happens when a function "remembers" and continues to access variables from its Lexical Scope, even after its parent function has finished running.
+
+Think of a closure as a backpack. When a function is born, it packs all the variables it needs from its surrounding environment into its invisible backpack. Wherever you take that function later, it still has its backpack.
+
+```java
+function createCounter() {
+  let count = 0; // Private variable
+
+  return {
+    increment: () => count++,
+    decrement: () => count--,
+    getCount: () => count
+  };
+}
+
+const counter = createCounter();
+console.log(counter.count); // undefined (cannot access directly)
+console.log(counter.getCount()); // 0
+```
+
+### Data Privacy 
+In JavaScript, we don't have traditional private variables (though # was introduced recently for classes). Closures allow us to create hidden variables that no outside code can change directly.
